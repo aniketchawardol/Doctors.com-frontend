@@ -16,13 +16,13 @@ export default App;
 function Navbar() {
   return (
     <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-sm w-full">
+      <p className="text-black m-4 text-xl  font-medium">
+          Doctors<p className="inline text-teal-300 bold text-2xl">.</p>com
+        </p>
       <div
         className=" drop-shadow-xl
          mx-[9px] rounded-3xl bg-teal-200 m-2"
       >
-        <p className="text-black mx-5  hover:cursor-pointer text-xl inline font-medium">
-          Doctors.com
-        </p>
 
         <input
           type="search"
