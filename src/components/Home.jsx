@@ -1,11 +1,14 @@
+import React from 'react'
+export default Home
+
 import { useState } from "react";
 import { Link } from 'react-router-dom'
-import "./App.css";
+import "../App.css";
 
-function App() {
+function Home() {
   return (
     <>
-      <div>
+      <div className='animate-appear'>
         <Navbar />
         <List />
       </div>
@@ -13,7 +16,6 @@ function App() {
   );
 }
 
-export default App;
 function Navbar() {
   return (
     <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-sm w-full">
@@ -22,7 +24,7 @@ function Navbar() {
         </p>
       <div
         className=" drop-shadow-xl
-         mx-[9px] rounded-xl bg-teal-200 m-2"
+         mx-[9px] rounded-2xl bg-teal-200 m-2"
       >
 
         <input
@@ -33,9 +35,9 @@ function Navbar() {
         <button className="buttons">Sort by</button>
         <Filter />
       </div>
-      <div className="mx-[9px] drop-shadow-xl rounded-xl bg-teal-200 m-2">
-        <Link className="buttons">Login</Link>
-        <button className="buttons">Signup</button>
+      <div className="mx-[9px] drop-shadow-xl rounded-2xl bg-teal-200 m-2">
+        <Link to="login" className="buttons">Login</Link>
+        <Link to="signup" className="buttons">Signup</Link>
       </div>
     </div>
   );
@@ -319,7 +321,7 @@ function List() {
 }
 function Item() {
   return (
-    <div className="transition duration-200 ease-in-out inline-block shadow-xl m-2 rounded-xl bg-white hover:shadow-2xl hover:shadow-gray-600 active:shadow-sm">
+    <div className="transition duration-200 ease-in-out inline-block shadow-xl m-2 rounded-2xl bg-white hover:shadow-2xl hover:shadow-gray-600 active:shadow-sm">
       <img
         src=".\src\assets\download.jpg"
         alt="hospital image"
