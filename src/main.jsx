@@ -7,6 +7,7 @@ import Home from './components/Home.jsx'
 import Loginpage from './components/loginpage.jsx'
 import Signup from './components/Signup.jsx'
 import PatientSignup from './components/PatientSignup.jsx'
+import HospitalSignup from './components/HospitalSignup.jsx'
 const router = createBrowserRouter (
   createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
@@ -14,6 +15,7 @@ const router = createBrowserRouter (
       <Route path='login' element={<Loginpage />} />
       <Route path='signup' element={<Signup />} />
       <Route path='signup/patientsignup' element={<PatientSignup />} />
+      <Route path='signup/hospitalsignup' element={<HospitalSignup />} />
     </Route>
   )
 )

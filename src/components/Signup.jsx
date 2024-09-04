@@ -11,7 +11,7 @@ function Signup() {
     <p className='mx-3 my-5 sm:float-start text-lg font-custom2'>Welcome to Doctors.com</p>
     <div className='inline-block mx-2 border-l-2 pl-2 my-4'>
    <Link to="patientsignup" className='signupbuttons'>New Patient</Link>
-   <Link className='signupbuttons'>For Hospitals & Laboratories</Link>
+   <Link to="hospitalsignup" className='signupbuttons'>For Hospitals & Laboratories</Link>
    </div>
   </div>
 </div>

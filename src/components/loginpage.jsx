@@ -7,7 +7,7 @@ function Loginpage() {
     <>
 <div className='flex bg-teal-100 justify-center h-screen items-center animate-appear'>
 <div className='flex flex-col items-center'>
-  <div className='border-2 rounded-3xl text-center bg-white drop-shadow-2xl relative'>
+  <div className='border-2 rounded-3xl text-center bg-white drop-shadow-2xl w-[340px]'>
     <p className='mx-3 my-5 text-xl font-custom2'>Loginpage</p>
     <input type="text" placeholder='Enter email or phone number' className='textinput' />
     <input type="password" placeholder='Enter password' className='textinput' />
