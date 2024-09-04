@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "../App.css";
 
 function Loginpage() {
   return (
@@ -10,10 +11,10 @@ function Loginpage() {
     <p className='mx-3 my-5 text-xl font-custom2'>Loginpage</p>
     <input type="text" placeholder='Enter email or phone number' className='textinput' />
     <input type="password" placeholder='Enter password' className='textinput' />
-    <button className='button'>Login</button>
+    <button className='buttons'>Login</button>
     <a href="#" className='text-teal-500 absolute bottom-2 right-2'>forgot password?</a>
   </div>
-  <Link to="/" className='button'>Homepage</Link>
+  <Link to="/" className='buttons'>Homepage</Link>
 </div>
 </div>
     </>
