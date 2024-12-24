@@ -30,11 +30,11 @@
   }
 
   .textinput {
-    @apply px-2 py-[4px] my-4 mx-2 rounded-xl border-gray-400 border-[2px]
+    @apply px-3 py-1 my-2 rounded-xl border-gray-200 border-[2px]
     transition ease-in-out duration-200 hover:shadow-lg 
-    hover:shadow-teal-200 font-custom w-[96%] block
+    hover:shadow-teal-200 font-custom w-full block
     focus:outline-teal-400 text-black 
-     resize-none
+     resize-none 
   }
  
   .smalltextinput {
@@ -47,9 +47,9 @@
  
 
   .signupbuttons {
-    @apply transition font-custom2 ease-in-out w-full 
+    @apply transition text-center font-custom2 ease-in-out w-full 
     duration-200 hover:bg-teal-400 hover:text-white
-     text-black py-[6px] rounded-xl px-10 active:scale-95 block my-2 ;
+     text-black py-[6px] rounded-xl px-10 active:scale-95 block my-1 
   }
 
 }
