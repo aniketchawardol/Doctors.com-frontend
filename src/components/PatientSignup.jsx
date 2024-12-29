@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 function PatientSignup() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ function PatientSignup() {
   });
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +46,7 @@ function PatientSignup() {
       }
 
       const response = await fetch(
-        "http://localhost:8000/api/v1/users/register",
+        `${import.meta.env.VITE_SERVER_URL}/api/v1/users/register`,
         {
           method: "POST",
           body: submitFormData,
@@ -56,6 +59,7 @@ function PatientSignup() {
       }
 
       const data = await response.json();
+
       console.log("User registered successfully:", data);
       alert("User registered successfully!");
 
@@ -63,6 +67,9 @@ function PatientSignup() {
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
       }
+      
+      navigate("/");
+
     } catch (error) {
       console.error("Error registering user:", error);
       alert("Error registering user: " + error.message);
@@ -70,12 +77,12 @@ function PatientSignup() {
   };
 
   return (
-    <div className="flex bg-teal-100 justify-center h-screen items-center animate-appear">
+    <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear">
       <form
         className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-96"
         onSubmit={handleSubmit}
       >
-        <p className="text-xl font-custom2 mb-4">Welcome to Doctors<h1 className="inline font-extrabold text-teal-500">.</h1>com</p>
+        <p className="text-xl font-custom2 mb-4">Welcome to Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com</p>
 
         {/* Image upload section */}
         <div className="mb-4 w-full">
@@ -144,7 +151,7 @@ function PatientSignup() {
 
         <Link
           to="/"
-          className="bg-gray-600 text-white transition text-center font-custom2 ease-in-out w-full 
+          className="bg-gray-500 text-white transition text-center font-custom2 ease-in-out w-full 
     duration-200 hover:bg-teal-400 
       py-[6px] rounded-xl px-10 active:scale-95 block my-1 "
         >

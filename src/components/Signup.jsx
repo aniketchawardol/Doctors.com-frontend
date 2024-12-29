@@ -4,7 +4,7 @@ import "../App.css";
 function Signup() {
   return (
     <>
-<div className='flex bg-teal-100 justify-center h-screen items-center animate-appear'>
+<div className='flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear'>
 <div className='flex flex-col items-center'>
 <Link to="/" className='buttons'>Back to Homepage</Link>
   <div className='border-2 rounded-3xl text-center bg-white drop-shadow-2xl '>

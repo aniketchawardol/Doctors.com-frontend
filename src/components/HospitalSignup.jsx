@@ -5,7 +5,7 @@ import { useRef } from 'react';
 function HospitalSignup() {
   return (
     <>
-<div className='flex bg-teal-100 justify-center h-full items-center animate-appear'>
+<div className='flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-full items-center animate-appear'>
 <div className='flex flex-col items-center m-5'>
   <div className='border-2 rounded-3xl text-center bg-white drop-shadow-2xl'>
     <p className='mx-3 my-5 text-xl font-custom2'>Welcome to Doctors.com</p>
