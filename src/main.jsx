@@ -15,6 +15,9 @@ import PatientSignup from "./components/PatientSignup.jsx";
 import HospitalSignup from "./components/HospitalSignup.jsx";
 import Userpage from "./components/Userpage.jsx";
 import EditUser from "./components/EditUser.jsx";
+import Hospitalpage from "./components/Hospitalpage.jsx";
+import EditHospitalForm from "./components/EditHospital.jsx";
+import HospitalVisitorPage from "./components/HospitalVisitorPage.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -25,6 +28,9 @@ const router = createBrowserRouter(
       <Route path="signup/hospitalsignup" element={<HospitalSignup />} />
       <Route path="userpage" element={<Userpage />}></Route>
       <Route path="edituser" element={<EditUser />}></Route>
+      <Route path="hospitalpage" element={<Hospitalpage />}></Route>
+      <Route path="edithospital" element={<EditHospitalForm />}></Route>
+      <Route path="/hospital/:slug" element={<HospitalVisitorPage />}></Route>
     </Route>
   )
 );

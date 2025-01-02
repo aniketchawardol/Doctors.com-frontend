@@ -1,59 +1,227 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
 import "../App.css";
-import { useRef } from 'react';
-function HospitalSignup() {
-  return (
-    <>
-<div className='flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-full items-center animate-appear'>
-<div className='flex flex-col items-center m-5'>
-  <div className='border-2 rounded-3xl text-center bg-white drop-shadow-2xl'>
-    <p className='mx-3 my-5 text-xl font-custom2'>Welcome to Doctors.com</p>
-    <UploadButton label ="Upload Profile photo"/>
-    <UploadButton label ="Upload other photos"/>
-    <input type="text" placeholder='Enter Hospital/Lab name' className='textinput' />
-    <textarea placeholder='Enter description' className='textinput' />
-    <textarea placeholder='Enter location' className='textinput' />
-    <input type="text" placeholder='Enter email' className='textinput' />
-    <button className='buttons'>Send OTP </button>
-    <input type="text" placeholder='Enter OTP for email' className='smalltextinput' />
-    <button className='buttons'>Verify </button>
-    <input type="number" placeholder='Enter helpline number 1' className='textinput' />
-    <input type="number" placeholder='Enter helpline number 2' className='textinput' />
-    <input type="number" placeholder='Enter helpline number 3' className='textinput' />
-    <label htmlFor="open">Opening time</label>
-    <input type="time" className='smalltextinput' id='open'/>
-    <label htmlFor="close">Closing time</label>
-    <input type="time" className='smalltextinput' id='close'/>
-    <input type="password" placeholder='Enter password' className='textinput' />
-    <input type="text" placeholder='REenter password' className='textinput' />
-    <button className='buttons'>Enter Doctors.com</button>
-  </div>
-  <Link to="/" className='buttons'>Homepage</Link>
-</div>
-</div>
-    </>
-  )
-}
-function UploadButton({label}) {
-  const fileInputRef = useRef(null);
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
+function HospitalSignup() {
+  const [formData, setFormData] = useState({
+    hospitalname: "",
+    email: "",
+    password: "",
+    helplinenumbers: [""],
+    specializations: [""],
+    openingtime: "",
+    closingtime: "",
+    description: "",
+    location: ""
+  });
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleArrayInputChange = (index, field, value) => {
+    setFormData(prev => {
+      const newArray = [...prev[field]];
+      newArray[index] = value;
+      return { ...prev, [field]: newArray };
+    });
+  };
+
+  const addArrayField = (field) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: [...prev[field], ""]
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePhoto(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const submitFormData = new FormData();
+      Object.keys(formData).forEach(key => {
+        if (Array.isArray(formData[key])) {
+          formData[key].forEach(value => {
+            if (value.trim()) submitFormData.append(key, value);
+          });
+        } else {
+          submitFormData.append(key, formData[key]);
+        }
+      });
+      
+      if (profilePhoto) {
+        submitFormData.append("profilephoto", profilePhoto);
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/register`,
+        {
+          method: "POST",
+          body: submitFormData,
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Registration failed");
+      }
+
+      const data = await response.json();
+      alert("Hospital registered successfully!");
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      navigate("/");
+
+    } catch (error) {
+      console.error("Error registering hospital:", error);
+      alert("Error registering hospital: " + error.message);
+    }
   };
 
   return (
-    <div className="upload-container">
-      <input
-        type="file"
-        ref={fileInputRef}
-        className="hidden"
-        onChange={(e) => console.log(e.target.files)}
-      />
-      <button className="buttons" onClick={handleButtonClick}>
-        {label}
-      </button>
+    <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center min-h-screen items-center animate-appear p-6">
+      <form className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-[32rem]" onSubmit={handleSubmit}>
+        <p className="text-xl font-custom2 mb-4">Register Your Hospital on Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com</p>
+
+        <div className="mb-4 w-full">
+          <div className="flex flex-col items-center">
+            {previewUrl ? (
+              <div className="mb-2 relative w-32 h-32">
+                <img src={previewUrl} alt="Profile preview" className="w-full h-full object-cover rounded-full"/>
+              </div>
+            ) : (
+              <div className="mb-2 w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center">
+                <span className="text-gray-400 text-sm">Hospital Logo</span>
+              </div>
+            )}
+            <label className="buttons">
+              Upload Logo
+              <input type="file" accept="image/*" onChange={handleImageChange} className="hidden"/>
+            </label>
+          </div>
+        </div>
+
+        <input
+          type="text"
+          name="hospitalname"
+          placeholder="Hospital Name"
+          className="textinput"
+          value={formData.hospitalname}
+          onChange={handleInputChange}
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className="textinput"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          className="textinput"
+          value={formData.password}
+          onChange={handleInputChange}
+          required
+        />
+
+        {formData.helplinenumbers.map((number, index) => (
+          <div key={index} className="w-full">
+            <input
+              type="tel"
+              placeholder={`Helpline Number ${index + 1}`}
+              className="textinput"
+              value={number}
+              onChange={(e) => handleArrayInputChange(index, 'helplinenumbers', e.target.value)}
+              required={index === 0}
+            />
+          </div>
+        ))}
+        <button type="button" onClick={() => addArrayField('helplinenumbers')} className="buttons mb-2">
+          Add Helpline Number
+        </button>
+
+        {formData.specializations.map((spec, index) => (
+          <div key={index} className="w-full">
+            <input
+              type="text"
+              placeholder={`Specialization ${index + 1}`}
+              className="textinput"
+              value={spec}
+              onChange={(e) => handleArrayInputChange(index, 'specializations', e.target.value)}
+            />
+          </div>
+        ))}
+        <button type="button" onClick={() => addArrayField('specializations')} className="buttons mb-2">
+          Add Specialization
+        </button>
+
+        <div className="flex w-full gap-2">
+          <input
+            type="time"
+            name="openingtime"
+            className="textinput"
+            value={formData.openingtime}
+            onChange={handleInputChange}
+          />
+          <input
+            type="time"
+            name="closingtime"
+            className="textinput"
+            value={formData.closingtime}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <textarea
+          name="description"
+          placeholder="Hospital Description"
+          className="textinput min-h-[100px]"
+          value={formData.description}
+          onChange={handleInputChange}
+        />
+
+        <input
+          type="text"
+          name="location"
+          placeholder="Location"
+          className="textinput"
+          value={formData.location}
+          onChange={handleInputChange}
+          required
+        />
+
+        <button type="submit" className="signupbuttons">
+          Register Hospital
+        </button>
+
+        <Link to="/" className="bg-gray-500 text-white transition text-center font-custom2 ease-in-out w-full duration-200 hover:bg-teal-400 py-[6px] rounded-xl px-10 active:scale-95 block my-1">
+          Homepage
+        </Link>
+      </form>
     </div>
   );
 }
-export default HospitalSignup
+
+export default HospitalSignup;
