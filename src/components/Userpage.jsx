@@ -93,11 +93,13 @@ function Userpage() {
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-3">Associated Hospitals</h3>
           {userdata.hospitals.length > 0 ? (
-            <ul className="list-disc pl-6">
-              {userdata.hospitals.map((hospitalId) => (
-                <li key={hospitalId} className="text-md">
-                  Hospital ID: {hospitalId}
+            <ul className="list-none pl-6">
+              {userdata.hospitals.map((hospital) => (
+                <Link to={`hospital/${hospital._id}`} className="buttons"> 
+                <li key={hospital._id} className="text-md">
+                  {hospital.hospitalname}
                 </li>
+                </Link>
               ))}
             </ul>
           ) : (

@@ -92,7 +92,9 @@ const OtherPhotosField = ({ photos, fun, fun2 }) => {
                 checked={selectedPhotos.includes(photo)}
                 onChange={() => handlePhotoSelection(photo)}
               />
+              <a href={photo} target="_blank" rel="noopener noreferrer">
               <img src={photo} className="h-[150px]" alt="Other" />
+              </a>
             </li>
           ))}
         </ul>

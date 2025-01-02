@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-
+import fetchUserData from "../fetchUserData.js";
 
 function HospitalVisitorPage() {
   const { slug } = useParams();
+  const [userdata, setUserdata] = useState({});
  
   const [loading, setLoading] = useState(true);
   const [hospitalData, setHospitalData] = useState({
     hospitalname: "Not Provided",
     email: "Not Provided",
-    helplinenumbers: [], // Ensuring this is always an array
-    specializations: [],  // Ensuring this is always an array
+    helplinenumbers: [], 
+    specializations: [],  
     openingtime: "Not Provided",
     closingtime: "Not Provided",
     profilephoto: null,
-    otherphotos: [], // Ensuring this is always an array
+    otherphotos: [], 
     description: "Not Provided",
     location: "Not Provided",
   });
+
+  const addPatient = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/add-patient`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ hospitalId: slug }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error(errorData.message || "Error adding patient");
+      return;
+    }
+    alert("Patient added successfully");
+  };
 
   useEffect(() => {
     async function loadHospitalData() {
@@ -27,10 +46,15 @@ function HospitalVisitorPage() {
       const data1 = await response.json();
       const data = data1.data || {}; 
       setHospitalData(data);
-      setLoading(false);
     }
+    async function loadUserData() {
+      const data = await fetchUserData();
+      setUserdata(data);
+    }
+    loadUserData();
     loadHospitalData();
-  }, [slug]);
+    setLoading(false);
+  }, [loading]);
 
   if (loading) {
     return (
@@ -91,7 +115,7 @@ function HospitalVisitorPage() {
       <div className="mb-6">
         <h3 className="text-xl font-semibold mb-3">Specializations</h3>
         {hospitalData.specializations && hospitalData.specializations.length > 0 ? (
-          <ul className="list-disc pl-6">
+          <ul className="list-none pl-6">
             {hospitalData.specializations.map((specialization, index) => (
               <li key={index} className="text-md">
                 {specialization}
@@ -111,7 +135,9 @@ function HospitalVisitorPage() {
       <ul className="flex flex-wrap gap-4">
           {hospitalData.otherphotos.map((photo) => (
             <li key={photo} className="flex items-center gap-3">
+              <a href={photo} target="_blank" rel="noopener noreferrer">
               <img src={photo} className="h-[150px]" alt="Other" />
+              </a>
             </li>
           ))}
         </ul>
@@ -120,6 +146,11 @@ function HospitalVisitorPage() {
         <Link to="/" className="buttons">
           Homepage
         </Link>
+        {userdata && 
+        <button className="transition bg-teal-500 font-custom2 ease-in-out inline-block
+    duration-200 hover:bg-teal-400 text-white
+      py-[6px] rounded-xl px-4 active:scale-90 my-2 mx-2" onClick={addPatient}>
+          Submit your reports</button>}
       </div>
     </div>
   );

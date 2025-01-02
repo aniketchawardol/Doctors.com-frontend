@@ -93,7 +93,10 @@ const ReportsField = ({ reports, name = "", fun, fun2 }) => {
                 checked={selectedReports.includes(report)}
                 onChange={() => handleReportSelection(report)}
               />
+              <a href={report} target="_blank" rel="noopener noreferrer">
               <img src={report} className="h-[150px]"></img>
+              </a>
+              
             </li>
           ))}
         </ul>

@@ -18,6 +18,7 @@ import EditUser from "./components/EditUser.jsx";
 import Hospitalpage from "./components/Hospitalpage.jsx";
 import EditHospitalForm from "./components/EditHospital.jsx";
 import HospitalVisitorPage from "./components/HospitalVisitorPage.jsx";
+import Image from "./components/Image.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -31,6 +32,8 @@ const router = createBrowserRouter(
       <Route path="hospitalpage" element={<Hospitalpage />}></Route>
       <Route path="edithospital" element={<EditHospitalForm />}></Route>
       <Route path="/hospital/:slug" element={<HospitalVisitorPage />}></Route>
+      <Route path="userpage/hospital/:slug" element={<HospitalVisitorPage />}></Route>
+      <Route path="hospitalpage/:slug" element={<Image />}></Route>
     </Route>
   )
 );

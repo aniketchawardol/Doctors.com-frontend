@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import fetchHospitalData from "../fetchHospitalData.js";
 import "../App.css";
 import OtherPhotosField from "./Otherphotos.jsx";
+import PatientList from "./PatientList.jsx";
 
 function HospitalDashboard() {
   const [loading, setLoading] = useState(true);
@@ -40,8 +41,10 @@ function HospitalDashboard() {
   }
 
   return (
-    <div className="w-full h-screen font-custom3 mx-auto p-6 animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
-      <h2 className="text-2xl font-bold text-center mb-6">Hospital Dashboard</h2>
+    <div className="w-full h-full font-custom3 mx-auto p-6 animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
+      <h2 className="text-2xl font-bold text-center mb-6">
+        Hospital Dashboard
+      </h2>
 
       <div className="flex flex-col sm:flex-row w-full mb-4 rounded-2xl shadow-2xl">
         <div className="flex-shrink-0 m-2">
@@ -109,22 +112,20 @@ function HospitalDashboard() {
         <p>{hospitalData.description}</p>
       </div>
 
+      <OtherPhotosField
+        photos={hospitalData.otherphotos}
+        fun={setLoading}
+        fun2={() => setLoading(true)}
+      />
+
       <div className="mb-6">
         <h3 className="text-xl font-semibold mb-3">Associated Patients</h3>
         {hospitalData.patients.length > 0 ? (
-          <ul className="list-disc pl-6">
-            {hospitalData.patients.map((patient) => (
-              <li key={patient._id} className="text-md">
-                Patient ID: {patient._id}
-              </li>
-            ))}
-          </ul>
+          <PatientList patients={hospitalData.patients} />
         ) : (
           <p>No associated patients.</p>
         )}
       </div>
-
-      <OtherPhotosField photos={hospitalData.otherphotos} fun={setLoading} fun2={() => setLoading(true)}/>
 
       <div className="flex space-x-4">
         <Link to="/edithospital" className="buttons">

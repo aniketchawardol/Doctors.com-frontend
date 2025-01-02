@@ -8,12 +8,12 @@ function Home() {
   return (
     <div className="animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 ">
       <Navbar />
-      <List />
     </div>
   );
 }
 
 function Navbar() {
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ type: "none" });
 
@@ -42,10 +42,11 @@ function Navbar() {
       } else {
         setUser({ type: "none" });
       }
-      setLoading(false);
+      
     }
     loadUserData();
-  }, []);
+    setLoading(false);
+  }, [loading]);
 
   if (loading)
     return (
@@ -57,6 +58,7 @@ function Navbar() {
     );
 
   return (
+    <>
     <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-sm w-full">
       <p className="text-black m-4 text-xl font-medium">
         Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com
@@ -66,8 +68,9 @@ function Navbar() {
           type="search"
           placeholder="Search Hospitals/Laboratories"
           className="searchbar"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <Filter />
       </div>
       <div className="mx-[9px] drop-shadow-xl rounded-2xl bg-teal-200 m-2">
         {user.type !== "none" ? (
@@ -91,66 +94,26 @@ function Navbar() {
         )}
       </div>
     </div>
-  );
-}
-
-function Filter() {
-  const [active, setActive] = useState(false);
-  const [anim, setAnim] = useState("");
-
-  return (
-    <>
-      <button
-        onClick={() => {
-          if (!active) {
-            setActive(true);
-            setAnim("animate-appear");
-          } else {
-            setAnim("animate-disappear");
-            setTimeout(() => setActive(false), 150);
-          }
-        }}
-        className="buttons"
-      >
-        Filter by Location
-      </button>
-      {active && (
-        <ul
-          className={`absolute rounded-xl top-[65px] w-[200px] left-[56%] ${anim}`}
-        >
-          <Location />
-        </ul>
-      )}
+    <List search={search}/>
     </>
   );
 }
 
-function Location() {
-  return (
-    <div className="text-sm text-teal-600 text-center">
-      <textarea
-        autoFocus
-        placeholder="Enter location details"
-        className="searchbar"
-      />
-    </div>
-  );
-}
 
-function List() {
+
+function List({ search = "" }) {
   const [hospitals, setHospitals] = useState([]); 
   const [page, setPage] = useState(1); 
   const [limit, setLimit] = useState(10); 
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
+
     async function fetchHospitals() {
+      const route = search !== "" ? `search/${search}` : "all";
       try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/all?page=${page}&limit=${limit}`,
+        const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/${route}?page=${page}&limit=${limit}`,
           { method: "GET" }
         );
         if (!response.ok) {
@@ -161,22 +124,10 @@ function List() {
         setTotalPages(Math.ceil(data.totalCount / limit)); 
       } catch (err) {
         setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+      } 
     }
     fetchHospitals();
-  }, [page, limit]); // Re-fetch when page or limit changes
-
-  if (loading) {
-    return (
-      <div className="w-full h-screen bg-gradient-to-tr from-white via-amber-100 to-teal-100 flex items-center justify-center">
-        <div className="w-16 h-16 animate-spin rounded-full bg-gradient-to-r from-teal-500 to-amber-100 flex items-center justify-center">
-          <div className="w-12 h-12 bg-white rounded-full" />
-        </div>
-      </div>
-    );
-  }
+  }, [page, limit, search]); 
 
   if (error) {
     return <div className="text-red-500 text-center">{error}</div>;
