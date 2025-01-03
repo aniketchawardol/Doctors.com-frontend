@@ -6,7 +6,7 @@ import fetchHospitalData from "../fetchHospitalData.js";
 
 function Home() {
   return (
-    <div className="animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 ">
+    <div className="animate-appear h-full w-full bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 ">
       <Navbar />
     </div>
   );
