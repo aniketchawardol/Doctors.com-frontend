@@ -1,9 +1,12 @@
 const fetchHospitalData = async () => {
   try {
-    let response = await fetch(` /api/v1/hospitals/current-hospital`, {
-      method: "POST",
-      credentials: "include",
-    });
+    let response = await fetch(
+      ` ${import.meta.env.VITE_BACKEND_URL}/api/v1/hospitals/current-hospital`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
     if (response.ok) {
       const responsedata = await response.json();
@@ -11,20 +14,26 @@ const fetchHospitalData = async () => {
       return responsedata.data;
     }
 
-    const refreshResponse = await fetch(` /api/v1/hospitals/refresh-token`, {
-      method: "POST",
-      credentials: "include",
-    });
+    const refreshResponse = await fetch(
+      ` ${import.meta.env.VITE_BACKEND_URL}/api/v1/hospitals/refresh-token`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
     if (!refreshResponse.ok) {
       console.log("No hospital logged in");
       return null;
     }
 
-    response = await fetch(` /api/v1/hospitals/current-hospital`, {
-      method: "POST",
-      credentials: "include",
-    });
+    response = await fetch(
+      ` ${import.meta.env.VITE_BACKEND_URL}/api/v1/hospitals/current-hospital`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
     if (response.ok) {
       const responsedata = await response.json();

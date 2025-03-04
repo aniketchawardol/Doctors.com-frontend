@@ -56,11 +56,14 @@ const EditPatientForm = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(` /api/v1/users/update-profile`, {
-        method: "POST",
-        body: formDataToSend,
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/update-profile`,
+        {
+          method: "POST",
+          body: formDataToSend,
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to update patient: ${response.statusText}`);
@@ -175,7 +178,6 @@ const EditPatientForm = () => {
           Update Patient Information
         </button>
       </form>
-      
     </div>
   );
 };
@@ -199,12 +201,7 @@ const InputField = ({ label, name, type, value, onChange, required }) => (
 const SelectField = ({ label, name, value, options, onChange }) => (
   <div>
     <label className="block text-sm font-medium mb-1">{label}</label>
-    <select
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="textinput"
-    >
+    <select name={name} value={value} onChange={onChange} className="textinput">
       <option value="">Select {label}</option>
       {options.map((option) => (
         <option key={option} value={option.toLowerCase()}>
@@ -216,5 +213,3 @@ const SelectField = ({ label, name, value, options, onChange }) => (
 );
 
 export default EditPatientForm;
-
-

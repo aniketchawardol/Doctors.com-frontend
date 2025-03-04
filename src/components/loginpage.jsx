@@ -8,12 +8,12 @@ function Loginpage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    userType: "patient"
+    userType: "patient",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -21,11 +21,11 @@ function Loginpage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const endpoint = formData.userType === "patient" ? "users" : "hospitals";
       const response = await fetch(
-        ` /api/v1/${endpoint}/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/${endpoint}/login`,
         {
           method: "POST",
           credentials: "include",
@@ -43,7 +43,11 @@ function Loginpage() {
       }
 
       const data = await response.json();
-      alert(`${formData.userType === "patient" ? "User" : "Hospital"} logged in successfully!`);
+      alert(
+        `${
+          formData.userType === "patient" ? "User" : "Hospital"
+        } logged in successfully!`
+      );
       navigate("/");
     } catch (error) {
       alert("Error logging in: " + error.message);
@@ -52,80 +56,82 @@ function Loginpage() {
 
   return (
     <>
-    <Helmet>
-            <title>Sign In to Doctors.com</title>
-            <meta name="description" content="Log in to Doctors.com to securely access, manage, and submit your medical reports with ease." />
-            <link rel="canonical" href="login" />
-    </Helmet>
-    <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear">
-      <div className="flex flex-col items-center">
-        <div className="border-2 rounded-3xl text-center bg-white drop-shadow-2xl w-[340px]">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-96"
-          >
-            <p className="mx-3 my-5 text-xl font-custom2">Login</p>
-
-            <div className="flex gap-4 mb-4">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="userType"
-                  value="patient"
-                  checked={formData.userType === "patient"}
-                  onChange={handleInputChange}
-                  className="mr-2"
-                />
-                Patient
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="userType"
-                  value="hospital"
-                  checked={formData.userType === "hospital"}
-                  onChange={handleInputChange}
-                  className="mr-2"
-                />
-                Hospital
-              </label>
-            </div>
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              className="textinput"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="password"
-              type="password"
-              placeholder="Enter password"
-              className="textinput"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-            <button type="submit" className="signupbuttons">
-              Login
-            </button>
-            <Link
-              to="/"
-              className="bg-gray-500 text-white transition text-center font-custom2 ease-in-out w-full duration-200 hover:bg-teal-400 py-[6px] rounded-xl px-10 active:scale-95 block my-1"
+      <Helmet>
+        <title>Sign In to Doctors.com</title>
+        <meta
+          name="description"
+          content="Log in to Doctors.com to securely access, manage, and submit your medical reports with ease."
+        />
+        <link rel="canonical" href="login" />
+      </Helmet>
+      <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear">
+        <div className="flex flex-col items-center">
+          <div className="border-2 rounded-3xl text-center bg-white drop-shadow-2xl w-[340px]">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-96"
             >
-              Homepage
-            </Link>
-          </form>
-          <a href="#" className="text-teal-500 absolute bottom-2 right-0">
-            forgot password?
-          </a>
+              <p className="mx-3 my-5 text-xl font-custom2">Login</p>
+
+              <div className="flex gap-4 mb-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="userType"
+                    value="patient"
+                    checked={formData.userType === "patient"}
+                    onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  Patient
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="userType"
+                    value="hospital"
+                    checked={formData.userType === "hospital"}
+                    onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  Hospital
+                </label>
+              </div>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                className="textinput"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter password"
+                className="textinput"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+              <button type="submit" className="signupbuttons">
+                Login
+              </button>
+              <Link
+                to="/"
+                className="bg-gray-500 text-white transition text-center font-custom2 ease-in-out w-full duration-200 hover:bg-teal-400 py-[6px] rounded-xl px-10 active:scale-95 block my-1"
+              >
+                Homepage
+              </Link>
+            </form>
+            <a href="#" className="text-teal-500 absolute bottom-2 right-0">
+              forgot password?
+            </a>
+          </div>
         </div>
       </div>
-      
-    </div>
     </>
   );
 }

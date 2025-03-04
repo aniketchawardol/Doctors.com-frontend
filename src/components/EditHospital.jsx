@@ -82,7 +82,7 @@ const EditHospitalForm = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        ` /api/v1/hospitals/update-profile`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/hospitals/update-profile`,
         {
           method: "POST",
           body: formDataToSend,
@@ -215,7 +215,6 @@ const EditHospitalForm = () => {
           Update Hospital Information
         </button>
       </form>
-      
     </div>
   );
 };

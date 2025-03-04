@@ -25,7 +25,7 @@ const OtherPhotosField = ({ photos, fun, fun2 }) => {
 
     try {
       const response = await fetch(
-        ` /api/v1/hospitals/upload-photos`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/hospitals/upload-photos`,
         {
           method: "POST",
           body: formData,
@@ -54,7 +54,7 @@ const OtherPhotosField = ({ photos, fun, fun2 }) => {
     fun(true);
     try {
       const response = await fetch(
-        ` /api/v1/hospitals/delete-photos`,
+        ` ${import.meta.env.VITE_BACKEND_URL}/api/v1/hospitals/delete-photos`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const OtherPhotosField = ({ photos, fun, fun2 }) => {
                 onChange={() => handlePhotoSelection(photo)}
               />
               <a href={photo} target="_blank" rel="noopener noreferrer">
-              <img src={photo} className="h-[150px]" alt="Other" />
+                <img src={photo} className="h-[150px]" alt="Other" />
               </a>
             </li>
           ))}
