@@ -42,8 +42,7 @@ export default function HowItWorks() {
     >
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl font-bold text-teal-500">
-          Welcome to Doctors
-          <span className="text-2xl text-teal-300 font-bold">.</span>com
+          Welcome to Doctors.com
         </h1>
         <p className="mt-4 text-lg text-gray-700">
           Seamless healthcare management for hospitals and patients.

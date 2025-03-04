@@ -26,6 +26,7 @@ function Navbar() {
       method: "POST",
       credentials: "include",
     });
+    window.location.reload();
     console.log("User logged out successfully");
   };
 

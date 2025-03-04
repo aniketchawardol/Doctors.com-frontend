@@ -12,7 +12,8 @@ export default {
       },
       animation: {
         appear: 'appear 0.2s ease-in-out',
-        disappear: 'disappear 0.2s ease-in-out'
+        disappear: 'disappear 0.2s ease-in-out',
+        marquee: 'marquee 25s linear infinite',
       },
       keyframes: {
         appear: {
@@ -26,6 +27,10 @@ export default {
            },
           '100%': { opacity: '0',
            },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
       },
     },

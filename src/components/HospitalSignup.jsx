@@ -222,22 +222,27 @@ function HospitalSignup() {
           </button>
 
           <div className="flex w-full gap-2">
-            <input
-              type="time"
-              name="openingtime"
-              placeholder="opening time"
-              className="textinput"
-              value={formData.openingtime}
-              onChange={handleInputChange}
-            />
-            <input
-              type="time"
-              placeholder="closing time"
-              name="closingtime"
-              className="textinput"
-              value={formData.closingtime}
-              onChange={handleInputChange}
-            />
+            <label className="block mb-2 text-sm font-medium text-gray-700 w-[50%]">
+              Opening Time
+              <input
+                type="time"
+                name="openingtime"
+                className="textinput mt-1"
+                value={formData.openingtime}
+                onChange={handleInputChange}
+              />
+            </label>
+
+            <label className="block mb-2 text-sm font-medium text-gray-700 w-[50%]">
+              Closing Time
+              <input
+                type="time"
+                name="closingtime"
+                className="textinput mt-1"
+                value={formData.closingtime}
+                onChange={handleInputChange}
+              />
+            </label>
           </div>
 
           <textarea
