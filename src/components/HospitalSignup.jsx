@@ -1,6 +1,7 @@
 import "../App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function HospitalSignup() {
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ function HospitalSignup() {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/register`,
+        ` /api/v1/hospitals/register`,
         {
           method: "POST",
           body: submitFormData,
@@ -94,6 +95,12 @@ function HospitalSignup() {
   };
 
   return (
+    <>
+     <Helmet>
+        <title>Hospital Signup page</title>
+        <meta name="description" content="Sign up on Doctors.com to manage patient reports, receive submissions, and streamline hospital operations securely and efficiently." />
+        <link rel="canonical" href="signup/hospitalsignup" />
+      </Helmet>
     <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center min-h-screen items-center animate-appear p-6">
       <form className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-[32rem]" onSubmit={handleSubmit}>
         <p className="text-xl font-custom2 mb-4">Register Your Hospital on Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com</p>
@@ -181,12 +188,14 @@ function HospitalSignup() {
           <input
             type="time"
             name="openingtime"
+            placeholder="opening time"
             className="textinput"
             value={formData.openingtime}
             onChange={handleInputChange}
           />
           <input
             type="time"
+            placeholder="closing time"
             name="closingtime"
             className="textinput"
             value={formData.closingtime}
@@ -221,6 +230,7 @@ function HospitalSignup() {
         </Link>
       </form>
     </div>
+    </>
   );
 }
 

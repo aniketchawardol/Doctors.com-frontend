@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import fetchUserData from "../fetchUserData.js";
+import { Helmet } from "react-helmet-async";
 
 function HospitalVisitorPage() {
   const { slug } = useParams();
@@ -22,7 +23,7 @@ function HospitalVisitorPage() {
 
   const addPatient = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/add-patient`, {
+    const response = await fetch(` /api/v1/hospitals/add-patient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +41,7 @@ function HospitalVisitorPage() {
 
   useEffect(() => {
     async function loadHospitalData() {
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/${slug}`, {
+      const response = await fetch(` /api/v1/hospitals/${slug}`, {
         method: "GET",
       });
       const data1 = await response.json();
@@ -67,6 +68,12 @@ function HospitalVisitorPage() {
   }
 
   return (
+    <>
+    <Helmet>
+            <title>{hospitalData.hospitalname}</title>
+            <meta name="description" content={`${hospitalData.hospitalname} ${hospitalData.email} ${hospitalData.location} ${hospitalData.description}`} />
+            <link rel="canonical" href={`hospitalpage/${slug}`} />
+    </Helmet>
     <div className="w-full h-screen font-custom3 mx-auto p-6 animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
       <h2 className="text-2xl font-bold text-center mb-6">{hospitalData.hospitalname}</h2>
 
@@ -153,6 +160,7 @@ function HospitalVisitorPage() {
           Submit your reports</button>}
       </div>
     </div>
+    </>
   );
 }
 

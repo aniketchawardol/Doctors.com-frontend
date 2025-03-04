@@ -25,7 +25,7 @@ const OtherPhotosField = ({ photos, fun, fun2 }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/upload-photos`,
+        ` /api/v1/hospitals/upload-photos`,
         {
           method: "POST",
           body: formData,
@@ -54,7 +54,7 @@ const OtherPhotosField = ({ photos, fun, fun2 }) => {
     fun(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/delete-photos`,
+        ` /api/v1/hospitals/delete-photos`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

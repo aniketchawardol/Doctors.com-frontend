@@ -2,7 +2,7 @@
 
 const fetchUserData = async () => {
     try {
-      let response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/current-user`, {
+      let response = await fetch(` /api/v1/users/current-user`, {
         method: "GET",
         credentials: "include",
       });
@@ -12,11 +12,11 @@ const fetchUserData = async () => {
         console.log(data);
         return data;
       } else {
-        await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/refresh-token`, {
+        await fetch(` /api/v1/users/refresh-token`, {
           method: "POST",
           credentials: "include",
         });
-        response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/current-user`, {
+        response = await fetch(` /api/v1/users/current-user`, {
           method: "GET",
           credentials: "include",
         });

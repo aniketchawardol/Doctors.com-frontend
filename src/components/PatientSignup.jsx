@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function PatientSignup() {
   const [formData, setFormData] = useState({
@@ -46,7 +47,7 @@ function PatientSignup() {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/v1/users/register`,
+        ` /api/v1/users/register`,
         {
           method: "POST",
           body: submitFormData,
@@ -77,6 +78,12 @@ function PatientSignup() {
   };
 
   return (
+    <>
+    <Helmet>
+                <title>Sign Up to Doctors.com</title>
+                <meta name="description" content="Create a Doctors.com account to securely upload, manage, and submit medical reports to hospitals with ease." />
+                <link rel="canonical" href="signup" />
+    </Helmet>
     <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear">
       <form
         className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-96"
@@ -158,7 +165,9 @@ function PatientSignup() {
           Homepage
         </Link>
       </form>
+      
     </div>
+    </>
   );
 }
 

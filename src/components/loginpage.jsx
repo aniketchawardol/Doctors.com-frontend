@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
+import { Helmet } from "react-helmet-async";
 
 function Loginpage() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Loginpage() {
     try {
       const endpoint = formData.userType === "patient" ? "users" : "hospitals";
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/v1/${endpoint}/login`,
+        ` /api/v1/${endpoint}/login`,
         {
           method: "POST",
           credentials: "include",
@@ -50,6 +51,12 @@ function Loginpage() {
   };
 
   return (
+    <>
+    <Helmet>
+            <title>Sign In to Doctors.com</title>
+            <meta name="description" content="Log in to Doctors.com to securely access, manage, and submit your medical reports with ease." />
+            <link rel="canonical" href="login" />
+    </Helmet>
     <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear">
       <div className="flex flex-col items-center">
         <div className="border-2 rounded-3xl text-center bg-white drop-shadow-2xl w-[340px]">
@@ -117,7 +124,9 @@ function Loginpage() {
           </a>
         </div>
       </div>
+      
     </div>
+    </>
   );
 }
 

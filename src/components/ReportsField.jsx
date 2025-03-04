@@ -30,7 +30,7 @@ const ReportsField = ({ reports, name = "", fun, fun2 }) => {
     });
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/upload-${route}reports`, {
+      const response = await fetch(` /api/v1/users/upload-${route}reports`, {
         method: "POST",
         body: formData,
         credentials: "include",
@@ -58,7 +58,7 @@ const ReportsField = ({ reports, name = "", fun, fun2 }) => {
     fun(true);
     try {
       console.log(JSON.stringify({ reportUrls: selectedReports }));
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/delete-${route}reports`, {
+      const response = await fetch(` /api/v1/users/delete-${route}reports`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reportUrls: selectedReports }),

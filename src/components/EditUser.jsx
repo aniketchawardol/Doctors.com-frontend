@@ -56,7 +56,7 @@ const EditPatientForm = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/update-profile`, {
+      const response = await fetch(` /api/v1/users/update-profile`, {
         method: "POST",
         body: formDataToSend,
         credentials: "include",
@@ -175,6 +175,7 @@ const EditPatientForm = () => {
           Update Patient Information
         </button>
       </form>
+      
     </div>
   );
 };

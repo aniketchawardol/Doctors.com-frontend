@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import { HelmetProvider } from "react-helmet-async";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -18,7 +19,6 @@ import EditUser from "./components/EditUser.jsx";
 import Hospitalpage from "./components/Hospitalpage.jsx";
 import EditHospitalForm from "./components/EditHospital.jsx";
 import HospitalVisitorPage from "./components/HospitalVisitorPage.jsx";
-import Image from "./components/Image.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -40,6 +40,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <HelmetProvider>
     <RouterProvider router={router} />
+    </HelmetProvider>
   </React.StrictMode>
 );

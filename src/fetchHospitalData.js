@@ -1,6 +1,6 @@
 const fetchHospitalData = async () => {
   try {
-    let response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/current-hospital`, {
+    let response = await fetch(` /api/v1/hospitals/current-hospital`, {
       method: "POST",
       credentials: "include",
     });
@@ -11,7 +11,7 @@ const fetchHospitalData = async () => {
       return responsedata.data;
     }
 
-    const refreshResponse = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/refresh-token`, {
+    const refreshResponse = await fetch(` /api/v1/hospitals/refresh-token`, {
       method: "POST",
       credentials: "include",
     });
@@ -21,7 +21,7 @@ const fetchHospitalData = async () => {
       return null;
     }
 
-    response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/hospitals/current-hospital`, {
+    response = await fetch(` /api/v1/hospitals/current-hospital`, {
       method: "POST",
       credentials: "include",
     });
