@@ -42,7 +42,7 @@ function Userpage() {
 
   return (
     <>
-      <div className="w-full h-screen font-custom3 mx-auto p-6 animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
+      <div className="w-full h-screen font-custom3 mx-auto p-6 animate-appear ">
         <h2 className="text-2xl font-bold text-center mb-6">User Profile</h2>
 
         <div className="flex flex-col sm:flex-row w-full mb-4 rounded-2xl shadow-2xl">

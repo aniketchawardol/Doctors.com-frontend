@@ -103,7 +103,7 @@ function HospitalSignup() {
         />
         <link rel="canonical" href="signup/hospitalsignup" />
       </Helmet>
-      <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center min-h-screen items-center animate-appear p-6">
+      <div className="flex justify-center min-h-screen items-center animate-appear p-6">
         <form
           className="flex flex-col items-center border-2 rounded-3xl bg-white drop-shadow-2xl p-6 w-[32rem]"
           onSubmit={handleSubmit}

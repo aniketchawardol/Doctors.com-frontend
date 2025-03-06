@@ -65,7 +65,7 @@ function HospitalVisitorPage() {
 
   if (loading) {
     return (
-      <div className="w-full h-screen bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 flex items-center justify-center">
+      <div className="w-full h-screen bg-gradient-to-tr flex items-center justify-center">
         <div className="flex w-16 h-16 rounded-full animate-spin items-center bg-gradient-to-r from-teal-500 to-amber-100 justify-center">
           <div className="w-12 h-12 bg-white rounded-full"></div>
         </div>

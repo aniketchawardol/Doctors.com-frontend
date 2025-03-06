@@ -114,7 +114,7 @@ const EditHospitalForm = () => {
   }
 
   return (
-    <div className="w-full flex items-center justify-center p-6 bg-gradient-to-tr from-white via-amber-100 to-teal-100">
+    <div className="w-full flex items-center justify-center p-6 ">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-lg space-y-4 bg-white p-6 rounded-lg shadow-xl"

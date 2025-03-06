@@ -8,9 +8,7 @@ import Poster from "../components/PosterPage.jsx";
 
 function Home() {
   return (
-    <div className="animate-appear h-full w-full bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 ">
       <Navbar />
-    </div>
   );
 }
 
@@ -79,7 +77,7 @@ function Navbar() {
         />
         <link rel="canonical" href="" />
       </Helmet>
-      <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-sm w-full">
+      <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-lg">
         <p className="text-black m-4 text-xl font-medium">
           Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com
         </p>

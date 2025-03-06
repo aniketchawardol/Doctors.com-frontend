@@ -64,7 +64,7 @@ function Loginpage() {
         />
         <link rel="canonical" href="login" />
       </Helmet>
-      <div className="flex bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 justify-center h-screen items-center animate-appear">
+      <div className="flex justify-center h-screen items-center animate-appear">
         <div className="flex flex-col items-center">
           <div className="border-2 rounded-3xl text-center bg-white drop-shadow-2xl w-[340px]">
             <form

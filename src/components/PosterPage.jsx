@@ -35,7 +35,7 @@ export default function HowItWorks() {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 p-6 md:p-12"
+      className="min-h-screen p-6 md:p-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: loaded ? 1 : 0, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -72,18 +72,18 @@ export default function HowItWorks() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <h2 className="text-2xl font-semibold text-teal-500">For Patients</h2>
+          <h2 className="text-2xl font-semibold text-teal-400">For Patients</h2>
           <ul className="mt-3 text-gray-700 space-y-2">
             <li>🔹 Upload and manage medical reports securely.</li>
             <li>🔹 Search for hospitals easily.</li>
             <li>🔹 Submit reports to hospitals.</li>
           </ul>
-          <a
-            href="signup/patientsignup"
-            className="mt-4 inline-block bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-lg"
+          <Link
+            to="signup/patientsignup"
+            className="bg-teal-200 mt-4 buttons"
           >
             Sign Up as Patient
-          </a>
+          </Link>
         </motion.div>
 
         {/* Hospital Guide */}
@@ -101,12 +101,12 @@ export default function HowItWorks() {
             <li>🔹 Access encrypted medical data.</li>
             <li>🔹 Provide efficient patient care.</li>
           </ul>
-          <a
-            href="signup/hospitalsignup"
-            className="mt-4 inline-block bg-amber-400 hover:bg-amber-500 text-white py-2 px-4 rounded-lg"
+          <Link
+            to="signup/hospitalsignup"
+            className="mt-4 bg-amber-300 hover:bg-amber-400 buttons"
           >
             Sign Up as Hospital
-          </a>
+          </Link>
         </motion.div>
       </div>
 
