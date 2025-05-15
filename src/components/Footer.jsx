@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer className="w-full bg-gray-900 text-gray-300 text-center py-6 mt-12 shadow-lg relative">
+    <footer className="w-full bg-gray-900 text-gray-300 text-center py-6 mt-12 shadow-lg relative bottom-0">
   <div className="container mx-auto px-4">
     <p className="text-sm">&copy; {new Date().getFullYear()} Doctors.com. All rights reserved.</p>
     <p className="text-sm">Made with ❤️ by Aniket</p>

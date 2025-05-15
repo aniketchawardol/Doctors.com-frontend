@@ -77,7 +77,7 @@ function Navbar() {
         />
         <link rel="canonical" href="" />
       </Helmet>
-      <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-lg">
+      <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-lg z-10">
         <p className="text-black m-4 text-xl font-medium">
           Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com
         </p>
