@@ -5,13 +5,9 @@ import Footer from "./Footer";
 function Layout() {
   return (
     <>
-      <div className="flex flex-col min-h-screen animate-appear w-full bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
-        <main className="flex-grow w-full pb-8">
+      <div className="min-h-screen animate-appear w-full bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
           <Outlet />
-        </main>
-        <div className="flex-shrink-0">
-          <Footer />
-        </div>
+        <Footer className="block"/>
       </div>
     </>
   );
