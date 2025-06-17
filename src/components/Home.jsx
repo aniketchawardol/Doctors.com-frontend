@@ -7,15 +7,18 @@ import { Helmet } from "react-helmet-async";
 import Poster from "../components/PosterPage.jsx";
 
 function Home() {
-  return (
-      <Navbar />
-  );
+  return <Navbar />;
 }
 
 function Navbar() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ type: "none" });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   const logoutUser = async () => {
     let route = user.type === "user" ? "users" : "hospitals";
@@ -59,7 +62,7 @@ function Navbar() {
           />
           <link rel="canonical" href="/" />
         </Helmet>
-        <div className="w-full h-screen bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 flex items-center justify-center">
+        <div className="w-full h-screen flex items-center justify-center">
           <div className="flex w-16 h-16 rounded-full animate-spin items-center bg-gradient-to-r from-teal-500 to-amber-100 justify-center">
             <div className="w-12 h-12 bg-white rounded-full "></div>
           </div>
@@ -78,43 +81,126 @@ function Navbar() {
         <link rel="canonical" href="" />
       </Helmet>
       <div className="flex sticky top-0 justify-center py-1 filter backdrop-blur-lg z-10">
+        {/* Logo - visible on all screens */}
         <p className="text-black m-4 text-xl font-medium">
           Doctors<span className="text-2xl text-teal-300 font-bold">.</span>com
         </p>
-        <div className="drop-shadow-xl mx-[9px] rounded-2xl bg-teal-200 m-2">
-          <input
-            type="search"
-            placeholder="Search Hospitals/Laboratories"
-            className="searchbar"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+
+        {/* Desktop navigation - unchanged from original */}
+        <div className="hidden md:block">
+          <div className="drop-shadow-xl mx-[9px] rounded-2xl bg-teal-200 m-2">
+            <input
+              type="search"
+              placeholder="Search Hospitals/Laboratories"
+              className="searchbar"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="mx-[9px] drop-shadow-xl rounded-2xl bg-teal-200 m-2">
-          {user.type !== "none" ? (
-            <>
-              <Link
-                to={user.type === "user" ? "userpage" : "hospitalpage"}
-                className="buttons"
-              >
-                Dashboard
-              </Link>
-              <button onClick={logoutUser} className="buttons">
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="login" className="buttons">
-                Login
-              </Link>
-              <Link to="signup" className="buttons">
-                Signup
-              </Link>
-            </>
-          )}
+        <div className="hidden md:block">
+          <div className="mx-[9px] drop-shadow-xl rounded-2xl bg-teal-200 m-2">
+            {user.type !== "none" ? (
+              <>
+                <Link
+                  to={user.type === "user" ? "userpage" : "hospitalpage"}
+                  className="buttons"
+                >
+                  Dashboard
+                </Link>
+                <button onClick={logoutUser} className="buttons">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="login" className="buttons">
+                  Login
+                </Link>
+                <Link to="signup" className="buttons">
+                  Signup
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile menu button - only visible on mobile */}
+        <button
+          className="md:hidden p-2 m-4 rounded-md text-gray-700 hover:bg-teal-100"
+          onClick={toggleMobileMenu}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            {mobileMenuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Menu - only visible when toggled */}
+      <div
+        className={`${
+          mobileMenuOpen ? "block" : "hidden"
+        } md:hidden`}
+      >
+          <div className="mx-auto drop-shadow-xl rounded-2xl w-fit bg-teal-200">
+            <input
+              type="search"
+              placeholder="Search Hospitals/Laboratories"
+              className="searchbar"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            </div>
+          <div className="drop-shadow-xl rounded-2xl bg-teal-200 my-2 mx-auto w-fit">
+            {user.type !== "none" ? (
+              <>
+                <Link
+                  to={user.type === "user" ? "userpage" : "hospitalpage"}
+                  className="buttons inline"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={logoutUser}
+                  className="buttons inline"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="login" className="buttons block w-full text-center">
+                  Login
+                </Link>
+                <Link to="signup" className="buttons block w-full text-center">
+                  Signup
+                </Link>
+              </>
+            )}
+          
         </div>
       </div>
+
       <List search={search} />
     </>
   );
@@ -170,7 +256,7 @@ function List({ search = "" }) {
 
   if (loading)
     return (
-      <div className="w-full h-screen bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 flex items-center justify-center">
+      <div className="w-full h-screen flex items-center justify-center">
         <div className="flex w-16 h-16 rounded-full animate-spin items-center bg-gradient-to-r from-teal-500 to-amber-100 justify-center">
           <div className="w-12 h-12 bg-white rounded-full "></div>
         </div>

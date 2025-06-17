@@ -41,7 +41,7 @@ function HospitalDashboard() {
   }
 
   return (
-    <div className="w-full h-full font-custom3 mx-auto p-6 animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
+    <div className="w-full font-custom3 mx-auto p-6 animate-appear ">
       <h2 className="text-2xl font-bold text-center mb-6">
         Hospital Dashboard
       </h2>
@@ -135,7 +135,6 @@ function HospitalDashboard() {
           Homepage
         </Link>
       </div>
-      
     </div>
   );
 }

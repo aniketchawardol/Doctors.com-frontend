@@ -83,7 +83,7 @@ function HospitalVisitorPage() {
         />
         <link rel="canonical" href={`hospitalpage/${slug}`} />
       </Helmet>
-      <div className="w-full h-screen font-custom3 mx-auto p-6 animate-appear bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100">
+      <div className="w-full font-custom3 mx-auto p-6 animate-appear">
         <h2 className="text-2xl font-bold text-center mb-6">
           {hospitalData.hospitalname}
         </h2>
@@ -151,17 +151,17 @@ function HospitalVisitorPage() {
           <p>{hospitalData.description}</p>
         </div>
 
-        <ul className="flex flex-wrap gap-4">
+        <ul className="flex flex-wrap gap-4 mb-6">
           {hospitalData.otherphotos.map((photo) => (
             <li key={photo} className="flex items-center gap-3">
               <a href={photo} target="_blank" rel="noopener noreferrer">
-                <img src={photo} className="h-[150px]" alt="Other" />
+                <img src={photo} className="h-[200px]" alt="Other" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 mb-10">
           <Link to="/" className="buttons">
             Homepage
           </Link>

@@ -32,7 +32,7 @@ function Userpage() {
 
   if (loading) {
     return (
-      <div className="w-full h-screen bg-gradient-to-tr from-white from-40% via-amber-100 to-teal-100 flex items-center justify-center">
+      <div className="w-full h-screen flex items-center justify-center">
         <div className="flex w-16 h-16 rounded-full animate-spin items-center bg-gradient-to-r from-teal-500 to-amber-100 justify-center">
           <div className="w-12 h-12 bg-white rounded-full"></div>
         </div>
@@ -42,7 +42,7 @@ function Userpage() {
 
   return (
     <>
-      <div className="w-full h-screen font-custom3 mx-auto p-6 animate-appear ">
+      <div className="w-full font-custom3 mx-auto p-6">
         <h2 className="text-2xl font-bold text-center mb-6">User Profile</h2>
 
         <div className="flex flex-col sm:flex-row w-full mb-4 rounded-2xl shadow-2xl">
@@ -87,18 +87,27 @@ function Userpage() {
           </div>
         </div>
 
-        <ReportsField reports={userdata.reports} fun={setLoading} fun2={() => setRefresh(true)}/>
-        <ReportsField reports={userdata.hiddenreports} name="Hidden" fun={setLoading} fun2={() => setRefresh(true)}/>
+        <ReportsField
+          reports={userdata.reports}
+          fun={setLoading}
+          fun2={() => setRefresh(true)}
+        />
+        <ReportsField
+          reports={userdata.hiddenreports}
+          name="Hidden"
+          fun={setLoading}
+          fun2={() => setRefresh(true)}
+        />
 
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-3">Associated Hospitals</h3>
           {userdata.hospitals.length > 0 ? (
             <ul className="list-none pl-6">
               {userdata.hospitals.map((hospital) => (
-                <Link to={`hospital/${hospital._id}`} className="buttons"> 
-                <li key={hospital._id} className="text-md">
-                  {hospital.hospitalname}
-                </li>
+                <Link to={`hospital/${hospital._id}`} className="buttons">
+                  <li key={hospital._id} className="text-md">
+                    {hospital.hospitalname}
+                  </li>
                 </Link>
               ))}
             </ul>
@@ -107,7 +116,7 @@ function Userpage() {
           )}
         </div>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 mb-10">
           <Link to="/edituser" className="buttons">
             Edit Profile
           </Link>
@@ -115,7 +124,6 @@ function Userpage() {
             Homepage
           </Link>
         </div>
-        
       </div>
     </>
   );
