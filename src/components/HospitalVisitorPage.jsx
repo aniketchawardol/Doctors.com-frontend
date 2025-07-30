@@ -58,6 +58,7 @@ function HospitalVisitorPage() {
       const data = await fetchUserData();
       setUserdata(data);
     }
+    setLoading(true);
     loadUserData();
     loadHospitalData();
     setLoading(false);
