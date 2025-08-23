@@ -3,7 +3,7 @@ import { SitemapStream } from "sitemap";
 
 const sitemap = new SitemapStream({ hostname: "https://doctors-com-frontend.vercel.app/" });
 
-const writeStream = createWriteStream("./dist/sitemap.xml");
+const writeStream = createWriteStream("./public/sitemap.xml"); 
 
 // static routes
 const links = [
