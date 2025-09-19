@@ -1,0 +1,26 @@
+{
+  "testUser": {
+    "email": "test@example.com",
+    "password": "testPassword123",
+    "name": "Test User",
+    "phone": "1234567890"
+  },
+  "testHospital": {
+    "email": "hospital@example.com",
+    "password": "hospitalPassword123",
+    "name": "Test Hospital",
+    "phone": "9876543210",
+    "address": "123 Medical Street, Health City"
+  },
+  "searchTerms": [
+    "cardiology",
+    "pediatrics",
+    "emergency",
+    "general"
+  ],
+  "apiEndpoints": {
+    "backend": "http://localhost:3000",
+    "users": "/api/v1/users",
+    "hospitals": "/api/v1/hospitals"
+  }
+}
